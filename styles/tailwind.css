@@ -1,0 +1,170 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+h1,
+p,
+a,
+li,
+label,
+h2,
+div,
+button,
+input,
+optgroup,
+select,
+textarea {
+  font-family: 'Montserrat', sans-serif;
+}
+
+.dif {
+  font-family: 'Akaya Telivigala', cursive;
+}
+
+button {
+  font: inherit;
+}
+
+body {
+  background-color: #ffffff;
+  height: 100vh;
+  overflow-x: hidden;
+  font-family: 'Arvo', serif;
+}
+
+.hero {
+  background-image: url('https://res.cloudinary.com/walking-voice-limited/image/upload/q_auto/v1615091286/2nd%20hand/pexels-jason-boyd-3209045_h4asro.webp');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.new {
+  transform: rotate(335deg);
+}
+
+/* PRODUCT SLIDER STYLES */
+.thumbnail-slider-wrap {
+  margin-top: 15px;
+  height: 85px;
+}
+.thumbnail-slider-wrap .slick-track .slick-slide {
+  text-align: center;
+}
+.thumbnail-slider-wrap .slick-track .slick-slide img {
+  width: 70%;
+}
+
+/* RANGE STYLES */
+input[type='range'] {
+  width: 100%;
+  margin: 5.8px 0;
+  background-color: transparent;
+  -webkit-appearance: none;
+}
+input[type='range']:focus {
+  outline: none;
+}
+input[type='range']::-webkit-slider-runnable-track {
+  background: #3071a9;
+  border: 0.2px solid #010101;
+  border-radius: 1.3px;
+  width: 100%;
+  height: 8.4px;
+  cursor: pointer;
+}
+input[type='range']::-webkit-slider-thumb {
+  margin-top: -6px;
+  width: 16px;
+  height: 20px;
+  background: #707070;
+  border: 1px solid #000000;
+  border-radius: 3px;
+  cursor: pointer;
+  -webkit-appearance: none;
+}
+input[type='range']:focus::-webkit-slider-runnable-track {
+  background: #367ebd;
+}
+input[type='range']::-moz-range-track {
+  background: #3071a9;
+  border: 0.2px solid #010101;
+  border-radius: 1.3px;
+  width: 100%;
+  height: 8.4px;
+  cursor: pointer;
+}
+input[type='range']::-moz-range-thumb {
+  width: 16px;
+  height: 20px;
+  background: #707070;
+  border: 1px solid #000000;
+  border-radius: 3px;
+  cursor: pointer;
+}
+input[type='range']::-ms-track {
+  background: transparent;
+  border-color: transparent;
+  border-width: 6.8px 0;
+  color: transparent;
+  width: 100%;
+  height: 8.4px;
+  cursor: pointer;
+}
+input[type='range']::-ms-fill-lower {
+  background: #2a6495;
+  border: 0.2px solid #010101;
+  border-radius: 2.6px;
+}
+input[type='range']::-ms-fill-upper {
+  background: #3071a9;
+  border: 0.2px solid #010101;
+  border-radius: 2.6px;
+}
+input[type='range']::-ms-thumb {
+  width: 16px;
+  height: 20px;
+  background: #707070;
+  border: 1px solid #000000;
+  border-radius: 3px;
+  cursor: pointer;
+  margin-top: 0px;
+  /*Needed to keep the Edge thumb centred*/
+}
+input[type='range']:focus::-ms-fill-lower {
+  background: #3071a9;
+}
+input[type='range']:focus::-ms-fill-upper {
+  background: #367ebd;
+}
+
+@supports (-ms-ime-align: auto) {
+  input[type='range'] {
+    margin: 0;
+  }
+}
+
+/* RANGE STYLES ENDS */
+.css-1pahdxg-control,
+.css-yk16xz-control {
+  border-color: transparent !important;
+  box-shadow: none !important;
+  cursor: none !important;
+}
+
+[type='text']:focus,
+[type='url']:focus,
+[type='number']:focus,
+[type='search']:focus,
+[type='tel']:focus,
+[type='time']:focus,
+[multiple]:focus,
+textarea:focus,
+select:focus {
+  border-color: transparent;
+  --tw-ring-color: #6b7280;
+}
+
+textarea {
+  resize: none;
+}
