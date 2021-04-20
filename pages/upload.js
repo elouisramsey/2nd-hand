@@ -6,7 +6,7 @@ import { connect } from 'react-redux'
 import Footer from '../components/Footer'
 
 import Select from 'react-select'
-import Login from './Login'
+import Login from '../pages/Login'
 
 const phoneRegex = RegExp(/^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/)
 
