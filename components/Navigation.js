@@ -61,7 +61,7 @@ const Navigation = (props) => {
               ) : (
                 <>
                   <a
-                    href='/Login'
+                    href='/login'
                     className='group relative text-xs md:text-sm text-gdark hover:text-glight focus:outline-none font-medium transition duration-500 ease-in-out capitalize pr-4'
                   >
                     sign in
@@ -127,7 +127,7 @@ const Navigation = (props) => {
             ) : (
               <div className='lg:hidden flex mt-4 justify-between items-center'>
                 <a
-                  href='/Login'
+                  href='/login'
                   className='bg-white text-black font-medium capitalize text-sm px-6 h-full outline-none text-center flex items-center justify-center focus:outline-none py-2 block w-full mr-2'
                 >
                   sign in

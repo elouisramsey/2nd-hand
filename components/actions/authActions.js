@@ -8,7 +8,7 @@ import Router from 'next/router'
 export const registerUser = (userData, history) => (dispatch) => {
   axios
     .post('https://iheejigoro.herokuapp.com/users/register', userData)
-    .then((res) => Router.push('/Login')) // re-direct to login on successful register
+    .then((res) => Router.push('/login')) // re-direct to login on successful register
     .catch((err) =>
       dispatch({
         type: GET_ERRORS,
@@ -17,7 +17,7 @@ export const registerUser = (userData, history) => (dispatch) => {
     )
 }
 
-// Login - get user token
+// login - get user token
 export const loginUser = (userData) => (dispatch) => {
   axios
     .post('https://iheejigoro.herokuapp.com/users/login', userData)

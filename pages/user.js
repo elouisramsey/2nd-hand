@@ -8,7 +8,7 @@ import {
   getRandomColor,
   createImageFromInitials
 } from '../components/utils/Randomnumb'
-import Login from '../pages/Login'
+import Login from './login'
 
 const User = (props) => {
   const { user } = props.auth
