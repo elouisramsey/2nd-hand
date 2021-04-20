@@ -1,71 +1,57 @@
 import Head from 'next/head'
-import React, { useState } from 'react'
-import Footer from '../../../components/Footer'
+import React from 'react'
 import Layout from '../../../components/Layout'
-import Navigation from '../../../components/Navigation'
 import Link from 'next/link'
 
-const client = require('contentful').createClient({
-  space: process.env.NEXT_PUBLIC_CONTENTFUL_SPACE,
-  accessToken: process.env.NEXT_PUBLIC_CONTENTFUL_ACCESS_TOKEN
-})
-
 export async function getStaticPaths() {
-  const data = await client.getEntries({
-    content_type: 'secondHand'
-  })
+  const res = await fetch('http://localhost:7000/product/')
+  const data = await res.json()
   return {
-    paths: data.items.map((item) => ({
-      params: { type: item.fields.category }
+    paths: data.map((item) => ({
+      params: { type: item.category }
     })),
     fallback: true
   }
 }
 
 export async function getStaticProps({ params }) {
-  const data = await client.getEntries({
-    content_type: 'secondHand',
-    'fields.category': params.type
+  const res = await fetch(`http://localhost:7000/product/`)
+  let selectedProduct = []
+
+  const data = await res.json()
+  data.map((item) => {
+    if (item.category === params.type) {
+      selectedProduct.push(item)
+    }
+    return data
   })
   return {
     props: {
-      data: data.items
+      item: selectedProduct
     }
   }
 }
 
-const Index = ({ data }) => {
-  // GET DIFFERENT CATEGORIES
-  const uniqIds = {}
-  const categories = data.filter(
-    (o) => !uniqIds[o.fields.category] && (uniqIds[o.fields.category] = true)
-  )
+const Index = ({ item }) => {
   return (
-    <Layout categories={categories}>
-      <div className='md:px-28 px-8 bg-white py-4 md:py-28'>
+    <Layout>
+      <div className='md:px-28 px-8 bg-white py-8 md:py-28'>
         <h1 className='text-lg flex justify-center items-center font-medium mb-8 text-black font-medium md:text-4xl uppercase'>
-          {data[0].fields.category}s
+          {item ? item[0].category : 'Nothing to display'}s
         </h1>
-        {data ? (
-          <div className='grid grid-cols-4 gap-x-3 gap-y-6'>
-            {data.map((item) => (
+        {item ? (
+          <div className='lg:grid lg:grid-cols-4 lg:gap-x-3 lg:gap-y-6'>
+            {item.map((item) => (
               <div
                 className='flex flex-col bg-white shadow-lg rounded-lg overflow-hidden mb-6'
-                key={item.sys.id}
+                key={item._id}
               >
-                <Link
-                  href={
-                    '/category/' +
-                    item.fields.category +
-                    '/' +
-                    item.fields.nameofitem
-                  }
-                >
+                <Link href={'/category/' + item.category + '/' + item._id}>
                   <a className=''>
                     <div>
                       <img
-                        src={item.fields.picturesofitem[0].fields.file.url}
-                        alt={item.fields.nameofitem}
+                        src={item.image[0]}
+                        alt={item.nameofitem}
                         width={500}
                         height={500}
                       />
@@ -74,15 +60,15 @@ const Index = ({ data }) => {
                 </Link>
                 <div className='my-6 px-2'>
                   <h1 className='text-gray-900 font-medium text-xl capitalize truncate'>
-                    {item.fields.nameofitem}
+                    {item.nameofitem}
                   </h1>
                   <h2 className='text-gray-400 font-medium text-xs capitalize truncate mb-2'>
-                    {item.fields.place}, {item.fields.state}
+                    {item.address}, {item.state}
                   </h2>
                   <div className='flex item-center justify-between mt-2'>
                     <h1 className='text-gray-700 font-light text-xl'>
                       {'\u20A6'}
-                      {item.fields.price.toLocaleString()}
+                      {item.price.toLocaleString()}
                     </h1>
                   </div>
                 </div>

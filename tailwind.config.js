@@ -11,7 +11,8 @@ module.exports = {
         glight: '#D6D6D6',
         gdark: '#707070',
         gdarker: '#0a0a0a',
-        inputColor: '#444141'
+        inputColor: '#444141',
+        bordercr: '#696969'
       },
       fontSize: {
         three: '1.3rem',

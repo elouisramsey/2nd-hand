@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import { withFormik } from 'formik'
 import * as Yup from 'yup'
-import Head from '../components/Head'
-import Navigation from '../components/Navigation'
+import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
 import Footer from '../components/Footer'
 
 import Select from 'react-select'
+import Login from './Login'
 
 const phoneRegex = RegExp(/^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/)
 
@@ -113,9 +114,7 @@ const MyForm = (props) => {
 
   return (
     <>
-      <Head />
-      <Navigation />
-      <h2 className='text-2xl capitalize text-black justify-center text-center my-12 px-8'>
+      <h2 className='text-2xl capitalize font-normal text-black justify-center text-center my-12 px-8'>
         upload what you want to sell
       </h2>
       <div className='bg-white flex flex-col items-center justify-center xl:px-60 my-4'>
@@ -330,7 +329,6 @@ const MyForm = (props) => {
           </form>
         </>
       </div>
-      <Footer />
     </>
   )
 }
@@ -408,8 +406,16 @@ class MySelect extends React.Component {
 
 const MyEnhancedForm = formikEnhancer(MyForm)
 
-const upload = () => {
-  return <MyEnhancedForm />
+const Upload = (props) => {
+  return <>{props.auth.isAuthenticated ? <MyEnhancedForm /> : <Login />}</>
 }
 
-export default upload
+Upload.propTypes = {
+  auth: PropTypes.object.isRequired,
+  errors: PropTypes.object.isRequired
+}
+const mapStateToProps = (state) => ({
+  auth: state.auth,
+  errors: state.errors
+})
+export default connect(mapStateToProps)(Upload)

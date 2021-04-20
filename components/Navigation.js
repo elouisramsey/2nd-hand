@@ -1,28 +1,42 @@
 import React, { useState, useContext } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import { AuthContext } from '../components/contexts/auth'
+import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
+import { logoutUser } from '../components/actions/authActions'
+import { DataContext } from './contexts/dataContext'
+import { FaTimes } from 'react-icons/fa'
+import { GiHamburgerMenu } from 'react-icons/gi'
 
-const Navigation = ({ categories }) => {
+const Navigation = (props) => {
   const [navbarOpen, setNavbarOpen] = useState(false)
   const router = useRouter()
-  const cate = categories
 
-  const { isAuthenticated } = useContext(AuthContext)
+  const data = useContext(DataContext)
+  // GET DIFFERENT CATEGORIES
+  const uniqIds = {}
+  const cate = data?.filter(
+    (o) => !uniqIds[o.category] && (uniqIds[o.category] = true)
+  )
+
+  const onLogoutClick = (e) => {
+    e.preventDefault()
+    props.logoutUser()
+  }
 
   return (
     <>
       <header className='w-full bg-hero'>
         <nav>
-          <div className='md:px-28 bg-white flex flex-wrap items-center md:flex-no-wrap justify-between py-4'>
-            <div className='ml-8 md:ml-0'>
+          <div className='md:px-20 bg-white flex flex-wrap items-center md:flex-no-wrap justify-between py-4'>
+            <div className='ml-4 lg:ml-8 md:ml-0'>
               <Link href='/'>
-                <a className=' dif text-5xl text-black uppercase'>
+                <a className=' dif text-base lg:text-5xl text-black uppercase'>
                   ihe ejigoro
                 </a>
               </Link>
             </div>
-            <div className='flex border border-solid border-glight w-2/5 h-10 overflow-hidden justify-between'>
+            <div className='hidden lg:flex border border-solid border-glight w-2/5 h-10 overflow-hidden justify-between'>
               <input
                 type='text'
                 placeholder='Search for items'
@@ -34,70 +48,113 @@ const Navigation = ({ categories }) => {
                 </button>
               </span>
             </div>
-            <div className='flex divide-x divide-gdark'>
-              {isAuthenticated ? (
+            <div className='hidden lg:flex divide-x divide-gdark items-center justify-center'>
+              {props.auth.isAuthenticated ? (
                 <>
-                  <a
-                    href='http://localhost:7000/logout'
+                  <button
+                    onClick={onLogoutClick}
                     className='group relative text-xs md:text-sm text-gdark hover:text-glight focus:outline-none font-medium transition duration-500 ease-in-out capitalize pl-4'
                   >
                     logout
-                  </a>
+                  </button>
                 </>
               ) : (
                 <>
                   <a
-                    href='http://localhost:7000/login'
+                    href='/Login'
                     className='group relative text-xs md:text-sm text-gdark hover:text-glight focus:outline-none font-medium transition duration-500 ease-in-out capitalize pr-4'
                   >
                     sign in
                   </a>
                   <a
-                    href='http://localhost:7000/login'
+                    href='/Register'
                     className='group relative text-xs md:text-sm text-gdark hover:text-glight focus:outline-none font-medium transition duration-500 ease-in-out capitalize pl-4'
                   >
                     register
                   </a>
                 </>
               )}
+              <Link href='/upload'>
+                <a className='bg-black text-white font-medium capitalize text-sm px-6 h-full outline-none text-center flex items-center justify-center focus:outline-none py-2 block ml-4'>
+                  upload
+                </a>
+              </Link>
             </div>
             <div className='ml-auto md:hidden mr-4'>
               <button
-                className='flex items-center h-6 w-6 outline-none focus:outline-none'
+                className='flex items-center h-6 w-6 outline-none focus:outline-none transition duration-500 ease-in-out'
                 type='button'
                 onClick={() => setNavbarOpen(!navbarOpen)}
               >
-                <svg
-                  className='h-full w-full'
-                  viewBox='0 0 20 20'
-                  xmlns='http://www.w3.org/2000/svg'
-                >
-                  <path d='M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z' />
-                </svg>
+                <FaTimes
+                  className={
+                    navbarOpen
+                      ? 'block text-2xl text-black transition duration-500 ease-in-out'
+                      : 'hidden'
+                  }
+                />
+                <GiHamburgerMenu
+                  className={
+                    navbarOpen
+                      ? 'hidden'
+                      : 'block text-2xl text-black transition duration-500 ease-in-out'
+                  }
+                />
               </button>
             </div>
           </div>
           <div
             className={
-              'w-full md:flex justify-start bg-black lg:px-28 px-8 md:h-12' +
+              'w-full md:flex justify-start bg-black lg:px-24 px-4 lg:px-8 md:h-12 h-screen pt-2 ' +
               (navbarOpen ? 'block' : ' hidden')
             }
           >
-            <ul className='relative inline-flex md:items-center md:h-full w-1/7 justify-between'>
+            {props.auth.isAuthenticated ? (
+              <div className='lg:hidden flex mt-4 justify-between items-center'>
+                <button
+                  onClick={onLogoutClick}
+                  className='bg-white text-black font-medium capitalize text-sm px-6 h-full outline-none text-center flex items-center justify-center focus:outline-none py-2 block w-full mr-2'
+                >
+                  logout
+                </button>
+                <a
+                  href='/upload'
+                  className='bg-white text-black font-medium capitalize text-sm px-6 h-full outline-none text-center flex items-center justify-center focus:outline-none py-2 block w-full'
+                >
+                  upload
+                </a>
+              </div>
+            ) : (
+              <div className='lg:hidden flex mt-4 justify-between items-center'>
+                <a
+                  href='/Login'
+                  className='bg-white text-black font-medium capitalize text-sm px-6 h-full outline-none text-center flex items-center justify-center focus:outline-none py-2 block w-full mr-2'
+                >
+                  sign in
+                </a>
+                <a
+                  href='/Register'
+                  className='bg-white text-black font-medium capitalize text-sm px-6 h-full outline-none text-center flex items-center justify-center focus:outline-none py-2 block w-full'
+                >
+                  register
+                </a>
+              </div>
+            )}
+            <ul className='relative inline-flex md:items-center md:h-full w-1/7 justify-between flex-col md:flex-row mt-4 lg:mt-0'>
               <li className='font-light h-full text-sm hover:text-glight capitalize flex items-center py-4 text-black'>
                 <Link href='/Furniture'>
-                  <a className='text-white hover:text-glight'>all</a>
+                  <a className='text-white hover:text-glight'>all furnitures</a>
                 </Link>
               </li>
               {cate
                 ? cate.map((link) => (
                     <li
                       className='font-light h-full text-sm hover:text-glight capitalize flex items-center py-4 text-black'
-                      key={link.fields.category}
+                      key={link.category}
                     >
-                      <Link href={'/category/' + link.fields.category}>
+                      <Link href={'/category/' + link.category}>
                         <a className='text-white hover:text-glight'>
-                          {link.fields.category}
+                          {link.category}
                         </a>
                       </Link>
                     </li>
@@ -121,4 +178,12 @@ const Navigation = ({ categories }) => {
   )
 }
 
-export default Navigation
+Navigation.propTypes = {
+  logoutUser: PropTypes.func.isRequired,
+  auth: PropTypes.object.isRequired
+}
+const mapStateToProps = (state) => ({
+  auth: state.auth
+})
+
+export default connect(mapStateToProps, { logoutUser })(Navigation)
