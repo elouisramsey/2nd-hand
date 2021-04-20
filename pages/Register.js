@@ -150,7 +150,7 @@ export class Register extends Component {
             Have an account?
             <span>
               {' '}
-              <Link href='/Login'>
+              <Link href='/login'>
                 <a className='text-red-600 hover:text-gray-400'>Login</a>
               </Link>
             </span>

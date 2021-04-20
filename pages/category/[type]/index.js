@@ -4,7 +4,7 @@ import Layout from '../../../components/Layout'
 import Link from 'next/link'
 
 export async function getStaticPaths() {
-  const res = await fetch('http://localhost:7000/product/')
+  const res = await fetch('https://bkfurnitures.herokuapp.com/product/')
   const data = await res.json()
   return {
     paths: data.map((item) => ({
@@ -15,7 +15,7 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
-  const res = await fetch(`http://localhost:7000/product/`)
+  const res = await fetch(`https://bkfurnitures.herokuapp.com/product/`)
   let selectedProduct = []
 
   const data = await res.json()

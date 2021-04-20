@@ -37,7 +37,7 @@ function MyApp({ Component, pageProps, data }) {
         // Logout user
         store.dispatch(logoutUser())
         // Redirect to login
-        Router.push('/Login')
+        Router.push('/login')
       }
     }
   }
@@ -55,7 +55,7 @@ function MyApp({ Component, pageProps, data }) {
 }
 
 MyApp.getInitialProps = async (ctx) => {
-  const res = await fetch('http://localhost:7000/product/')
+  const res = await fetch('https://bkfurnitures.herokuapp.com/product/')
   const json = await res.json()
   return {
     data: json
