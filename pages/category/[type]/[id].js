@@ -21,7 +21,9 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
-  const res = await fetch(`https://bkfurnitures.herokuapp.com/${params.id}`)
+  const res = await fetch(
+    `https://bkfurnitures.herokuapp.com/product/${params.id}`
+  )
   const data = await res.json()
   return {
     props: {
