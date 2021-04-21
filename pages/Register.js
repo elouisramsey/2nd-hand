@@ -24,10 +24,10 @@ export class Register extends Component {
 
   render() {
     return (
-      <div className='bg-white flex flex-col items-center justify-center xl:px-60'>
+      <div className='bg-white flex flex-col items-center justify-center px-6 xl:px-60'>
         <div className='flex flex-col bg-white shadow-lg rounded-lg overflow-hidden w-full my-16'>
           {' '}
-          <h2 className='text-2xl font-normal text-black justify-center text-center my-4'>
+          <h2 className='text-lg lg:text-2xl font-normal text-black justify-center text-center my-4'>
             Register as a seller
           </h2>
           <Formik
@@ -43,8 +43,12 @@ export class Register extends Component {
                 .email('Email is invalid')
                 .required('Email is required'),
               password: Yup.string()
-                .min(6, 'Password must be at least 6 characters')
-                .required('Password is required'),
+                .min(8, 'Password must be at least 8 characters')
+                .required('Password is required')
+                .matches(
+                  /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/,
+                  'Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and One Special Case Character'
+                ),
               password2: Yup.string()
                 .oneOf([Yup.ref('password'), null], 'Passwords must match')
                 .required('Confirm Password is required')
@@ -56,7 +60,7 @@ export class Register extends Component {
             }}
             render={({ errors, status, touched }) => (
               <Form noValidate className='flex flex-col'>
-                <div className='px-16 py-8'>
+                <div className='lg:px-16 py-4 lg:py-8 px-2'>
                   {' '}
                   <div className='mb-4 flex flex-col'>
                     <label htmlFor='nameofvendor' />
@@ -118,7 +122,7 @@ export class Register extends Component {
                   <div className='mb-4 flex flex-col'>
                     <label htmlFor='password2' />
                     <Field
-                      placeholder='Confirm passwprd'
+                      placeholder='Confirm password'
                       name='password2'
                       type='password'
                       className={
@@ -137,7 +141,7 @@ export class Register extends Component {
                   <div className='flex'>
                     <button
                       type='submit'
-                      className='group relative py-2 px-8 border-black text-sm text-white bg-black focus:outline-none  border-2 border-solid border-gray-black font-medium transition duration-500 ease-in-out hover:bg-white hover:text-black capitalize md:text-base'
+                      className='group relative py-2 px-8 border-black text-tiny lg:text-xs text-white bg-black focus:outline-none  border-2 border-solid border-gray-black font-medium transition duration-500 ease-in-out hover:bg-white hover:text-black capitalize md:text-base'
                     >
                       Register
                     </button>
@@ -146,7 +150,7 @@ export class Register extends Component {
               </Form>
             )}
           />
-          <p className='text-gray-400 text-sm p-6 justify-center items-center w-full text-center'>
+          <p className='text-gray-400 text-xs lg:text-sm p-6 justify-center items-center w-full text-center'>
             Have an account?
             <span>
               {' '}

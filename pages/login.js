@@ -52,14 +52,14 @@ const Login = (props) => {
 
   return (
     <>
-      <div className='bg-white flex flex-col items-center justify-center xl:px-60'>
+      <div className='bg-white flex flex-col items-center px-6 justify-center xl:px-60'>
         {' '}
         <div className='flex flex-col bg-white shadow-lg rounded-lg overflow-hidden w-full my-16'>
-          <h2 className='text-2xl font-normal text-black justify-center text-center my-4'>
+          <h2 className='text-lg lg:text-2xl font-normal text-black justify-center text-center my-4'>
             Login to your account
           </h2>
           <form noValidate className='flex flex-col' onSubmit={handleSubmit}>
-            <div className='px-16 py-8'>
+            <div className='lg:px-16 py-4 lg:py-8 px-2'>
               <div className='mb-4 flex flex-col'>
                 <label
                   htmlFor='email'
@@ -104,14 +104,14 @@ const Login = (props) => {
               <div className='flex'>
                 <button
                   type='submit'
-                  className='group relative py-2 px-8 border-black text-sm text-white bg-black focus:outline-none  border-2 border-solid border-gray-black font-medium transition duration-500 ease-in-out hover:bg-white hover:text-black capitalize md:text-base'
+                  className='group relative py-2 px-8 border-black text-tiny lg:text-xs text-white bg-black focus:outline-none  border-2 border-solid border-gray-black font-medium transition duration-500 ease-in-out hover:bg-white hover:text-black capitalize md:text-base'
                 >
                   login
                 </button>
               </div>
             </div>
           </form>
-          <p className='text-gray-400 text-sm p-6 justify-center items-center w-full text-center'>
+          <p className='text-gray-400 text-xs lg:text-sm p-6 justify-center items-center w-full text-center'>
             Don't have an account?
             <span>
               {' '}
