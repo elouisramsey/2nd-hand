@@ -7,7 +7,7 @@ import Router from 'next/router'
 // Register User
 export const registerUser = (userData, history) => (dispatch) => {
   axios
-    .post('https://iheejigoro.herokuapp.com/users/register', userData)
+    .post('https://iheejigoro.herokuapp.com/routes/users/register', userData)
     .then((res) => Router.push('/login')) // re-direct to login on successful register
     .catch((err) =>
       dispatch({
@@ -20,7 +20,7 @@ export const registerUser = (userData, history) => (dispatch) => {
 // login - get user token
 export const loginUser = (userData) => (dispatch) => {
   axios
-    .post('https://iheejigoro.herokuapp.com/users/login', userData)
+    .post('https://iheejigoro.herokuapp.com/routes/users/login', userData)
     .then((res) => {
       // Save to localStorage
       // Set token to localStorage
