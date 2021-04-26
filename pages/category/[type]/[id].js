@@ -64,6 +64,7 @@ const Id = ({ item }) => {
   return (
     <>
       <div className='md:px-28 px-8 bg-white py-4 md:py-28'>
+        <Navigation />
         {item ? (
           <>
             <h1 className='text-lg flex justify-center items-center font-normal mb-4 text-black font-medium md:text-4xl uppercase mt-8'>

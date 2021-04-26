@@ -5,7 +5,7 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { logoutUser } from '../components/actions/authActions'
 import { DataContext } from './contexts/dataContext'
-import { FaTimes } from 'react-icons/fa'
+import { FaTimes, FaUser } from 'react-icons/fa'
 import { GiHamburgerMenu } from 'react-icons/gi'
 
 const Navigation = (props) => {
@@ -60,23 +60,27 @@ const Navigation = (props) => {
                 </>
               ) : (
                 <>
-                  <a
-                    href='/login'
-                    className='group relative text-xs md:text-sm text-gdark hover:text-glight focus:outline-none font-medium transition duration-500 ease-in-out capitalize pr-4'
-                  >
-                    sign in
-                  </a>
-                  <a
-                    href='/Register'
-                    className='group relative text-xs md:text-sm text-gdark hover:text-glight focus:outline-none font-medium transition duration-500 ease-in-out capitalize pl-4'
-                  >
-                    register
-                  </a>
+                  <Link href='/login'>
+                    <a className='group relative text-xs md:text-sm text-gdark hover:text-glight focus:outline-none font-medium transition duration-500 ease-in-out capitalize pr-4'>
+                      sign in
+                    </a>
+                  </Link>
+                  <Link href='/Register'>
+                    <a className='group relative text-xs md:text-sm text-gdark hover:text-glight focus:outline-none font-medium transition duration-500 ease-in-out capitalize pl-4'>
+                      register
+                    </a>
+                  </Link>
                 </>
               )}
               <Link href='/upload'>
                 <a className='bg-black text-white font-medium capitalize text-sm px-6 h-full outline-none text-center flex items-center justify-center focus:outline-none py-2 block ml-4'>
                   upload
+                </a>
+              </Link>
+
+              <Link href='/user'>
+                <a className='text-black font-medium capitalize text-sm pl-2 h-full text-center flex items-center justify-center py-2 block'>
+                  <FaUser />
                 </a>
               </Link>
             </div>
@@ -117,27 +121,24 @@ const Navigation = (props) => {
                 >
                   logout
                 </button>
-                <a
-                  href='/upload'
-                  className='bg-white text-black font-medium capitalize text-sm px-6 h-full outline-none text-center flex items-center justify-center focus:outline-none py-2 block w-full'
-                >
-                  upload
-                </a>
+                <Link href='/upload'>
+                  <a className='bg-white text-black font-medium capitalize text-sm px-6 h-full outline-none text-center flex items-center justify-center focus:outline-none py-2 block w-full'>
+                    upload
+                  </a>
+                </Link>
               </div>
             ) : (
               <div className='lg:hidden flex mt-4 justify-between items-center'>
-                <a
-                  href='/login'
-                  className='bg-white text-black font-medium capitalize text-sm px-6 h-full outline-none text-center flex items-center justify-center focus:outline-none py-2 block w-full mr-2'
-                >
-                  sign in
-                </a>
-                <a
-                  href='/Register'
-                  className='bg-white text-black font-medium capitalize text-sm px-6 h-full outline-none text-center flex items-center justify-center focus:outline-none py-2 block w-full'
-                >
-                  register
-                </a>
+                <Link href='/login'>
+                  <a className='bg-white text-black font-medium capitalize text-sm px-6 h-full outline-none text-center flex items-center justify-center focus:outline-none py-2 block w-full mr-2'>
+                    sign in
+                  </a>
+                </Link>
+                <Link href='/Register'>
+                  <a className='bg-white text-black font-medium capitalize text-sm px-6 h-full outline-none text-center flex items-center justify-center focus:outline-none py-2 block w-full'>
+                    register
+                  </a>
+                </Link>
               </div>
             )}
             <ul className='relative inline-flex md:items-center md:h-full w-1/7 justify-between flex-col md:flex-row mt-4 lg:mt-0'>

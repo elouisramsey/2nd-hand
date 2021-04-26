@@ -18,8 +18,8 @@ const User = (props) => {
     <>
       {props.auth.isAuthenticated ? (
         <div className='grid md:grid-cols-3 gap-8 lg:px-16 py-8'>
-          <div className='shadow-lg bg-white'>
-            <div className='flex flex-col'>
+          <div className='shadow-lg bg-white mx-4'>
+            <div className='flex flex-col px-4'>
               {' '}
               <div className='flex flex-col items-center justify-center my-6'>
                 <div className='bg-transparent overflow-hidden rounded-full  border-4 h-32 w-32 border-transparent'>
@@ -43,20 +43,20 @@ const User = (props) => {
                   {user.nameofvendor}
                 </p>
               </div>
-              <div className='divide-y divide-gray-300 px-8'>
+              <div className='divide-y divide-gray-300'>
                 <Link href='/'>
                   <a className='flex items-center py-8 text-gray-600 text-sm lg:text-base capitalize hover:text-glight transition duration-500 ease-in-out'>
                     <GrShop className='text-black text-3xl mr-4' />
                     My Adverts
                   </a>
                 </Link>
-                <Link href='/'>
+                <Link href='/settings'>
                   <a className='flex items-center py-8 text-gray-600 text-sm lg:text-base capitalize hover:text-glight transition duration-500 ease-in-out'>
                     <GrUserSettings className='text-black text-3xl mr-4' />
                     settings
                   </a>
                 </Link>
-                <Link href='/'>
+                <Link href='/upload'>
                   <a className='flex items-center py-8 text-gray-600 text-sm lg:text-base capitalize hover:text-glight transition duration-500 ease-in-out'>
                     <GiSellCard className='text-black text-3xl mr-4' />
                     sell
@@ -65,8 +65,8 @@ const User = (props) => {
               </div>
             </div>
           </div>
-          <div className=''>1 </div>
-          <div className=''>2</div>
+          <div className='hidden lg:block'>1 </div>
+          <div className='hidden lg:block'>2</div>
         </div>
       ) : (
         <Login />

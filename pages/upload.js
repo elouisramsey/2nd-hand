@@ -121,7 +121,7 @@ const MyForm = (props) => {
         <>
           <form
             encType='multipart/form-data'
-            className='w-full'
+            className='w-full px-4 mb-12'
             onSubmit={handleSubmit}
           >
             <div className='md:gap-2 md:grid md:grid-cols-2'>
@@ -394,7 +394,7 @@ class MySelect extends React.Component {
           onChange={this.handleChange}
           onBlur={this.handleBlur}
           value={this.props.value}
-          className='block w-full md:text-sm text-tiny border border-solid border-black text-inputColor h-7 md:h-11  bg-input focus:outline-none px-2 capitalize focus:ring-transparent '
+          className='block w-full md:text-sm text-tiny border border-solid border-black text-inputColor h-full bg-input focus:outline-none px-2 capitalize focus:ring-transparent '
         />
         {!!this.props.error && this.props.touched && (
           <p className='error text-red-600 text-xs'>{this.props.error}</p>
