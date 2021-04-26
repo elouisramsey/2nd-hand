@@ -10,7 +10,7 @@ import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
 
 export async function getStaticPaths() {
-  const res = await fetch('https://bkfurnitures.herokuapp.com/product/')
+  const res = await fetch('https://iheejigoro.herokuapp.com/product/')
   const data = await res.json()
   return {
     paths: data.map((item) => ({
@@ -22,7 +22,7 @@ export async function getStaticPaths() {
 
 export async function getStaticProps({ params }) {
   const res = await fetch(
-    `https://bkfurnitures.herokuapp.com/product/${params.id}`
+    `https://iheejigoro.herokuapp.com/product/${params.id}`
   )
   const data = await res.json()
   return {

@@ -55,7 +55,7 @@ function MyApp({ Component, pageProps, data }) {
 }
 
 MyApp.getInitialProps = async (ctx) => {
-  const res = await fetch('https://bkfurnitures.herokuapp.com/product/')
+  const res = await fetch('https://iheejigoro.herokuapp.com/product/')
   const json = await res.json()
   return {
     data: json
