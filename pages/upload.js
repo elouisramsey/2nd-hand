@@ -49,7 +49,7 @@ const formikEnhancer = withFormik({
       .max(7, 'Maximum 7 characters')
       .required('Price is Required'),
     description: Yup.string()
-      .min(10, 'Mininum 10 characters')
+      .min(50, 'Mininum 50 characters')
       .required('Description is Required'),
     state: Yup.object().shape({
       label: Yup.string().required(),
@@ -84,7 +84,7 @@ const formikEnhancer = withFormik({
     data.append('color', values.color)
     data.append('state', values.state.value)
 
-    return fetch('http://localhost:7000/product', {
+    return fetch('https://iheejigoro.herokuapp.com/product', {
       method: 'post',
       headers: new Headers({
         Accept: 'application/json'
