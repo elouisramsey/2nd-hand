@@ -84,7 +84,12 @@ const Navigation = (props) => {
                 </a>
               </Link>
             </div>
-            <div className='ml-auto md:hidden mr-4'>
+            <div className='ml-auto md:hidden mr-4 flex items-center '>
+              <Link href='/user'>
+                <a className='text-black font-medium capitalize text-sm mr-2 h-full text-center flex items-center justify-center py-2 block'>
+                  <FaUser />
+                </a>
+              </Link>
               <button
                 className='flex items-center h-6 w-6 outline-none focus:outline-none transition duration-500 ease-in-out'
                 type='button'
