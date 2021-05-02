@@ -3,7 +3,7 @@ import Link from 'next/link'
 import Navigation from '../../../components/Navigation'
 import Footer from '../../../components/Footer'
 import { FiPhone } from 'react-icons/fi'
-
+import fetch from 'isomorphic-unfetch'
 import Slider from 'react-slick'
 
 import 'slick-carousel/slick/slick.css'

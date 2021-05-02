@@ -1,7 +1,8 @@
 import '../styles/tailwind.css'
 import { Provider } from 'react-redux'
 import { DataContext } from '../components/contexts/dataContext'
-import jwt_decode from 'jwt-decode'
+import jwtDecode from 'jwt-decode'
+import fetch from 'isomorphic-unfetch'
 import setAuthToken from '../components/utils/setAuthToken'
 import { setCurrentUser, logoutUser } from '../components/actions/authActions'
 import { store } from '../components/store'
@@ -28,7 +29,7 @@ function MyApp({ Component, pageProps, data }) {
       const token = localStorage.jwtToken
       setAuthToken(token)
       // Decode token and get user info and exp
-      const decoded = jwt_decode(token)
+      const decoded = jwtDecode(token)
       // Set user and isAuthenticated
       store.dispatch(setCurrentUser(decoded))
       // Check for expired token

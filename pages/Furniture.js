@@ -1,59 +1,44 @@
 import React, { useState, useEffect, useContext } from 'react'
-import Footer from '../components/Footer'
-import Head from '../components/Head'
-import Navigation from '../components/Navigation'
 import Link from 'next/link'
 import { DataContext } from '../components/contexts/dataContext'
 
 const Furniture = () => {
   const data = useContext(DataContext)
   const [furnitures, setFurnitures] = useState(data)
+  const [filteredFurnitures, setFilteredFurnitures] = useState([])
   const [name, setName] = useState('')
   const [amount, setAmount] = useState(1000)
   const [color, setColor] = useState('')
   const [location, setLocation] = useState('')
 
-  //   GET MIN AND MAX PRICES
-  // const min = furnitures.reduce(function (prev, curr) {
-  //   return prev.price < curr.price ? prev : curr
-  // })
-  // const max = furnitures.reduce(function (prev, curr) {
-  //   return prev.price > curr.price ? prev : curr
-  // })
+  useEffect(() => {
+    let result = furnitures
 
-  //   filter with state
-  const searchChangeHandler = (e) => {
-    setLocation(e.target.value)
-    const filteredOptions = furnitures.filter((opt) => {
-      return name === ''
-        ? opt.state.toLowerCase().includes(e.target.value.trim().toLowerCase())
-        : opt.state
-            .toLowerCase()
-            .includes(e.target.value.trim().toLowerCase()) &&
-            opt.nameofitem.toLowerCase().includes(name.toLowerCase())
-    })
-    setFurnitures(filteredOptions)
-  }
+    const filterByState = (arr) => {
+      return arr.filter((item) =>
+        item.state.toLowerCase().includes(location.toLocaleLowerCase())
+      )
+    }
 
-  //   filter by name
-  const onChange = (e) => {
-    setName(e.target.value)
-    const results = furnitures.filter((res) => {
-      const query = name
-      return location === ''
-        ? res.nameofitem.toLowerCase().includes(query)
-        : res.nameofitem.toLowerCase().includes(query) &&
-            res.state.toLowerCase().includes(location.toLowerCase())
-    })
-    setFurnitures(results)
-  }
+    const filterByName = (arr) => {
+      return arr.filter((item) =>
+        item.nameofitem.toLowerCase().includes(name.toLocaleLowerCase())
+      )
+    }
+    const filterByColor = (arr) => {
+      return arr.filter(
+        (item) =>
+          item.color.toLowerCase().indexOf(color.toLocaleLowerCase()) !== -1
+      )
+    }
 
-  // search by color
+    result = filterByName(result)
+    result = filterByColor(result)
+    result = filterByState(result)
 
-  // filter by amount
-  // const ranger = (e) => {
-  //   setAmount(e.target.value)
-  // }
+    setFilteredFurnitures(result)
+  }, [name, color, location])
+
   return (
     <>
       <div className='md:px-28 px-8 bg-white py-4 md:py-28'>
@@ -65,20 +50,30 @@ const Furniture = () => {
             {' '}
             <label htmlFor='name' />
             <input
-              className='border border-solid text-gray-300 border-gray-300 focus:border-gray-300 p-2 outline-none focus:ring-transparent text-sm mb-4 lg:mb-0 w-full'
+              className='border border-solid text-gray-800 border-gray-300 focus:border-gray-300 p-2 outline-none focus:ring-transparent text-xs md:text-sm mb-4 lg:mb-0 w-full'
               type='text'
               placeholder='Find furniture by name'
               value={name}
-              onChange={onChange}
+              onChange={(e) => setName(e.target.value)}
+            />
+          </div>
+          <div className=''>
+            {' '}
+            <label htmlFor='color' />
+            <input
+              className='border border-solid text-gray-800 border-gray-300 focus:border-gray-300 p-2 outline-none focus:ring-transparent text-xs md:text-sm mb-4 lg:mb-0 w-full'
+              type='text'
+              placeholder='Find furniture by color'
+              value={color}
+              onChange={(e) => setColor(e.target.value)}
             />
           </div>
           <select
-            className='block w-full md:text-sm text-tiny border border-solid border-gray-300 text-gray-300 h-9 md:h-11 focus:border-transparent bg-input focus:outline-none px-2 focus:ring-gray-300 '
-            id='dropdown'
-            onChange={searchChangeHandler}
+            className='block w-full md:text-sm text-xs text-tiny border border-solid border-gray-300 text-gray-800 h-full focus:border-transparent bg-input focus:outline-none px-2 focus:ring-gray-300 '
+            onChange={(e) => setLocation(e.target.value)}
             defaultValue={location}
           >
-            <option value=''>-- Pick a state --</option>
+            <option value=''>Pick a state</option>
             <option value='Abia'>Abia</option>
             <option value='Abuja'>Abuja</option>
             <option value='Adamawa'>Adamawa</option>
@@ -118,9 +113,9 @@ const Furniture = () => {
             <option value='Zamfara'>Zamfara</option>
           </select>
         </div>
-        {furnitures ? (
+        {filteredFurnitures.length > 1 ? (
           <div className='lg:grid lg:grid-cols-4 lg:gap-x-3 lg:gap-y-6'>
-            {furnitures.map((item) => (
+            {filteredFurnitures.map((item) => (
               <div
                 className='flex flex-col bg-white shadow-lg rounded-lg overflow-hidden mb-6'
                 key={item._id}
@@ -154,8 +149,8 @@ const Furniture = () => {
             ))}
           </div>
         ) : (
-          <p className='text-gray-600 text-sm truncate'>
-            Nothing to display...
+          <p className='text-gray-600 text-sm truncate text-center'>
+            Your search did not return any matches
           </p>
         )}
       </div>

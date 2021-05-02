@@ -2,6 +2,7 @@ import Head from 'next/head'
 import React from 'react'
 import Layout from '../../../components/Layout'
 import Link from 'next/link'
+import fetch from 'isomorphic-unfetch'
 
 export async function getStaticPaths() {
   const res = await fetch('https://iheejigoro.herokuapp.com/product/')

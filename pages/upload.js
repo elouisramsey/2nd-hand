@@ -3,7 +3,7 @@ import { withFormik } from 'formik'
 import * as Yup from 'yup'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import Footer from '../components/Footer'
+import fetch from 'isomorphic-unfetch'
 
 import Select from 'react-select'
 import Login from './login'
