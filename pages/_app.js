@@ -12,6 +12,7 @@ import Navigation from '../components/Navigation'
 import NProgress from 'nprogress'
 import 'nprogress/nprogress.css'
 import Footer from '../components/Footer'
+import { useEffect } from 'react'
 
 Router.events.on('routeChangeStart', (url) => {
   NProgress.start()
@@ -23,25 +24,27 @@ function MyApp({ Component, pageProps, data }) {
   // Check for token to keep user logged in
   const ISSERVER = typeof window === 'undefined'
 
-  if (!ISSERVER) {
-    if (localStorage.jwtToken) {
-      // Set auth token header auth
-      const token = localStorage.jwtToken
-      setAuthToken(token)
-      // Decode token and get user info and exp
-      const decoded = jwtDecode(token)
-      // Set user and isAuthenticated
-      store.dispatch(setCurrentUser(decoded))
-      // Check for expired token
-      const currentTime = Date.now() / 1000 // to get in milliseconds
-      if (decoded.exp < currentTime) {
-        // Logout user
-        store.dispatch(logoutUser())
-        // Redirect to login
-        Router.push('/login')
+  useEffect(() => {
+    if (!ISSERVER) {
+      if (localStorage.jwtToken) {
+        // Set auth token header auth
+        const token = JSON.parse(localStorage.jwtToken)
+        setAuthToken(token)
+        // Decode token and get user info and exp
+        const decoded = jwtDecode(token)
+        // Set user and isAuthenticated
+        store.dispatch(setCurrentUser(decoded))
+        // Check for expired token
+        const currentTime = Date.now() / 1000 // to get in milliseconds
+        if (decoded.exp < currentTime) {
+          // Logout user
+          store.dispatch(logoutUser())
+          // Redirect to login
+          Router.push('/login')
+        }
       }
     }
-  }
+  }, [])
 
   return (
     <DataContext.Provider value={data}>

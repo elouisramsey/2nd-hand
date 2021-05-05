@@ -1,6 +1,6 @@
 import axios from 'axios'
 import setAuthToken from '../utils/setAuthToken'
-import jwt_decode from 'jwt-decode'
+import jwtDecode from 'jwt-decode'
 import { GET_ERRORS, SET_CURRENT_USER, USER_LOADING } from './types'
 import Router from 'next/router'
 
@@ -26,12 +26,12 @@ export const loginUser = (userData) => (dispatch) => {
       // Set token to localStorage
       const { token } = res.data
       if (typeof window !== 'undefined') {
-        localStorage.setItem('jwtToken', token)
+        localStorage.setItem('jwtToken', JSON.stringify(token))
       }
       // Set token to Auth header
       setAuthToken(token)
       // Decode token to get user data
-      const decoded = jwt_decode(token)
+      const decoded = jwtDecode(token)
       // Set current user
       dispatch(setCurrentUser(decoded))
     })
@@ -43,6 +43,33 @@ export const loginUser = (userData) => (dispatch) => {
       })
     )
 }
+
+// update user
+export const updateUser = (userData) => (dispatch) => {
+  axios
+    .put(`http://localhost:8000/routes/users/${userData.id}`, userData)
+    .then((res) => {
+      // Save to localStorage
+      // Set token to localStorage
+      const { token } = res.data
+      if (typeof window !== 'undefined') {
+        localStorage.setItem('jwtToken', JSON.stringify(token))
+      }
+      // Set token to Auth header
+      setAuthToken(token)
+      // Decode token to get user data
+      const decoded = jwtDecode(token)
+      // Set current user
+      dispatch(setCurrentUser(decoded))
+    })
+    .catch((err) =>
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data
+      })
+    )
+}
+
 // Set logged in user
 export const setCurrentUser = (decoded) => {
   return {

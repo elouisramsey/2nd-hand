@@ -92,7 +92,6 @@ const Navigation = (props) => {
               </Link>
               <button
                 className='flex items-center h-6 w-6 outline-none focus:outline-none transition duration-500 ease-in-out'
-                type='button'
                 onClick={() => setNavbarOpen(!navbarOpen)}
               >
                 <FaTimes

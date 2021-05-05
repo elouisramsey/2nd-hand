@@ -50,7 +50,7 @@ const Furniture = () => {
             {' '}
             <label htmlFor='name' />
             <input
-              className='border border-solid text-gray-800 border-gray-300 focus:border-gray-300 p-2 outline-none focus:ring-transparent text-xs md:text-sm mb-4 lg:mb-0 w-full'
+              className='border border-solid text-gray-800 border-gray-300 focus:border-transparent p-2 outline-none focus:ring-transparent text-xs md:text-sm mb-4 lg:mb-0 w-full'
               type='text'
               placeholder='Find furniture by name'
               value={name}
@@ -61,7 +61,7 @@ const Furniture = () => {
             {' '}
             <label htmlFor='color' />
             <input
-              className='border border-solid text-gray-800 border-gray-300 focus:border-gray-300 p-2 outline-none focus:ring-transparent text-xs md:text-sm mb-4 lg:mb-0 w-full'
+              className='border border-solid text-gray-800 border-gray-300 focus:border-transparent p-2 outline-none focus:ring-transparent text-xs md:text-sm mb-4 lg:mb-0 w-full'
               type='text'
               placeholder='Find furniture by color'
               value={color}
@@ -69,7 +69,7 @@ const Furniture = () => {
             />
           </div>
           <select
-            className='block w-full md:text-sm text-xs text-tiny border border-solid border-gray-300 text-gray-800 h-full focus:border-transparent bg-input focus:outline-none px-2 focus:ring-gray-300 '
+            className='block w-full md:text-sm text-xs border border-solid border-gray-300 text-gray-800 h-full focus:border-transparent bg-input focus:outline-none px-2 focus:ring-gray-300 '
             onChange={(e) => setLocation(e.target.value)}
             defaultValue={location}
           >

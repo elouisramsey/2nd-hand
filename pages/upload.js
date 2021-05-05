@@ -10,7 +10,6 @@ import Login from './login'
 
 const phoneRegex = RegExp(/^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/)
 
-// const [image, setImage] = useState(null)
 let image = null
 
 const handleFiles = (e) => {
@@ -56,7 +55,7 @@ const formikEnhancer = withFormik({
       value: Yup.string().required()
     })
   }),
-  mapPropsToValues: (props) => ({
+  mapPropsToValues: () => ({
     category: '',
     description: '',
     nameofitem: '',
@@ -74,6 +73,8 @@ const formikEnhancer = withFormik({
       data.append('image', image[x])
     }
 
+    const { user } = props.auth
+
     data.append('category', values.category)
     data.append('description', values.description)
     data.append('nameofitem', values.nameofitem)
@@ -83,6 +84,7 @@ const formikEnhancer = withFormik({
     data.append('price', values.price)
     data.append('color', values.color)
     data.append('state', values.state.value)
+    data.append('seller', user.id)
 
     return fetch('https://iheejigoro.herokuapp.com/product', {
       method: 'post',

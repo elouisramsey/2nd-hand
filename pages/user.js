@@ -1,7 +1,6 @@
 import React from 'react'
 import { GrShop, GrUserSettings } from 'react-icons/gr'
 import { GiSellCard } from 'react-icons/gi'
-import Link from 'next/link'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import {
@@ -9,8 +8,11 @@ import {
   createImageFromInitials
 } from '../components/utils/Randomnumb'
 import Login from './login'
+import Settings from '../components/Settings'
 
 const User = (props) => {
+  const [openTab, setOpenTab] = React.useState(1)
+
   const { user } = props.auth
   let imgSrc = ''
 
@@ -44,29 +46,66 @@ const User = (props) => {
                 </p>
               </div>
               <div className='divide-y divide-gray-300'>
-                <Link href='/'>
-                  <a className='flex items-center py-8 text-gray-600 text-sm lg:text-base capitalize hover:text-glight transition duration-500 ease-in-out'>
-                    <GrShop className='text-black text-3xl mr-4' />
-                    My Adverts
-                  </a>
-                </Link>
-                <Link href='/settings'>
-                  <a className='flex items-center py-8 text-gray-600 text-sm lg:text-base capitalize hover:text-glight transition duration-500 ease-in-out'>
-                    <GrUserSettings className='text-black text-3xl mr-4' />
-                    settings
-                  </a>
-                </Link>
-                <Link href='/upload'>
-                  <a className='flex items-center py-8 text-gray-600 text-sm lg:text-base capitalize hover:text-glight transition duration-500 ease-in-out'>
-                    <GiSellCard className='text-black text-3xl mr-4' />
-                    sell
-                  </a>
-                </Link>
+                <a
+                  onClick={(e) => {
+                    e.preventDefault()
+                    setOpenTab(1)
+                  }}
+                  data-toggle='tab'
+                  href='#link1'
+                  role='tablist'
+                  className={
+                    'flex items-center py-8  text-sm lg:text-base capitalize hover:text-glight transition duration-500 ease-in-out ' +
+                    (openTab === 1 ? 'text-glight' : 'text-gray-600')
+                  }
+                >
+                  <GrShop className='text-black text-3xl mr-4' />
+                  My Adverts
+                </a>
+                <a
+                  onClick={(e) => {
+                    e.preventDefault()
+                    setOpenTab(2)
+                  }}
+                  data-toggle='tab'
+                  href='#link2'
+                  role='tablist'
+                  className={
+                    'flex items-center py-8  text-sm lg:text-base capitalize hover:text-glight transition duration-500 ease-in-out ' +
+                    (openTab === 2 ? 'text-glight' : 'text-gray-600')
+                  }
+                >
+                  <GrUserSettings className='text-black text-3xl mr-4' />
+                  settings
+                </a>
+                <a
+                  onClick={(e) => {
+                    e.preventDefault()
+                    setOpenTab(3)
+                  }}
+                  data-toggle='tab'
+                  href='#link3'
+                  role='tablist'
+                  className={
+                    'flex items-center py-8  text-sm lg:text-base capitalize hover:text-glight transition duration-500 ease-in-out ' +
+                    (openTab === 3 ? 'text-glight' : 'text-gray-600')
+                  }
+                >
+                  <GiSellCard className='text-black text-3xl mr-4' />
+                  sell
+                </a>
               </div>
             </div>
           </div>
-          <div className='hidden lg:block'>1 </div>
-          <div className='hidden lg:block'>2</div>
+          <div className='hidden lg:block col-span-2'>
+            {' '}
+            <div className={openTab === 1 ? 'block' : 'hidden'} id='link1'>
+              1
+            </div>{' '}
+            <div className={openTab === 2 ? 'block' : 'hidden'} id='link2'>
+              <Settings />
+            </div>
+          </div>
         </div>
       ) : (
         <Login />

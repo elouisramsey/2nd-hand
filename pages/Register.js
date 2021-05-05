@@ -14,12 +14,13 @@ export class Register extends Component {
     }
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.errors) {
-      this.setState({
-        errors: nextProps.errors
-      })
+  static getDerivedStateFromProps(props) {
+    if (props.errors) {
+      return {
+        errors: props.errors
+      }
     }
+    return null
   }
 
   render() {

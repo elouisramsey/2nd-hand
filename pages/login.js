@@ -8,21 +8,21 @@ import { connect } from 'react-redux'
 const Login = (props) => {
   const [state, setState] = useState({
     email: '',
-    password: '',
-    errors: {}
+    password: ''
   })
+  const [errors, setErrors] = useState({})
 
   useEffect(() => {
     if (props.auth.isAuthenticated) {
       Router.push('/user') // push user to dashboard when they login
     }
-
-    if (props.errors) {
-      setState({
-        errors: props.errors
-      })
-    }
   }, [props.auth.isAuthenticated])
+
+  useEffect(() => {
+    if (props.errors) {
+      setErrors(props.errors)
+    }
+  }, [props.errors])
 
   useEffect(() => {
     if (props.auth.isAuthenticated) {
@@ -66,13 +66,13 @@ const Login = (props) => {
                   type='email'
                   placeholder='Enter your email'
                   name='email'
-                  value={state.email}
+                  value={state.email || ''}
                   onChange={handleChange}
                   className='block w-full md:text-sm text-tiny border border-solid border-black text-inputColor h-7 md:h-11  bg-input focus:outline-none px-2 focus:ring-transparent '
                 />
                 <span className='text-red-600 text-tiny mt-2'>
-                  {state.errors.email}
-                  {state.errors.emailnotfound}
+                  {errors.email || ''}
+                  {errors.emailnotfound || ''}
                 </span>
               </div>
               <div className='mb-4 flex flex-col'>
@@ -86,13 +86,13 @@ const Login = (props) => {
                   type='password'
                   placeholder='Enter your password'
                   name='password'
-                  value={state.password}
+                  value={state.password || ''}
                   onChange={handleChange}
                   className='block w-full md:text-sm text-tiny border border-solid border-black text-inputColor h-7 md:h-11  bg-input focus:outline-none px-2 focus:ring-transparent '
                 />
                 <span className='text-red-600 text-tiny'>
-                  {state.errors.password}
-                  {state.errors.passwordincorrect}
+                  {errors.password || ''}
+                  {errors.passwordincorrect || ''}
                 </span>
               </div>
 
