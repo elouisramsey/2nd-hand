@@ -113,7 +113,7 @@ const Navigation = (props) => {
           </div>
           <div
             className={
-              'w-full md:flex justify-start bg-black lg:px-24 px-4 lg:px-8 md:h-12 h-screen pt-2 ' +
+              'w-full md:flex justify-start bg-black lg:px-24 px-4 lg:px-8 md:h-12 h-screen pt-2 lg:pt-0 ' +
               (navbarOpen ? 'block' : ' hidden')
             }
           >
@@ -132,7 +132,7 @@ const Navigation = (props) => {
                 </Link>
               </div>
             ) : (
-              <div className='lg:hidden flex mt-4 justify-between items-center'>
+              <div className='lg:hidden flex mt-4 justify-between items-center lg:mt-0'>
                 <Link href='/login'>
                   <a className='bg-white text-black font-medium capitalize text-sm px-6 h-full outline-none text-center flex items-center justify-center focus:outline-none py-2 block w-full mr-2'>
                     sign in
@@ -145,8 +145,8 @@ const Navigation = (props) => {
                 </Link>
               </div>
             )}
-            <ul className='relative inline-flex md:items-center md:h-full w-1/7 justify-between flex-col md:flex-row mt-4 lg:mt-0'>
-              <li className='font-light h-full text-sm hover:text-glight capitalize flex items-center py-4 text-black'>
+            <ul className='relative inline-flex md:items-center md:h-full w-1/7 justify-between items-center py-4 flex-col md:flex-row mt-4 lg:mt-0'>
+              <li className='font-light h-full text-sm hover:text-glight capitalize text-black'>
                 <Link href='/Furniture'>
                   <a className='text-white hover:text-glight'>all furnitures</a>
                 </Link>
@@ -154,7 +154,7 @@ const Navigation = (props) => {
               {cate
                 ? cate.map((link) => (
                     <li
-                      className='font-light h-full text-sm hover:text-glight capitalize flex items-center py-4 text-black'
+                      className='font-light h-full text-sm hover:text-glight capitalize text-black'
                       key={link.category}
                     >
                       <Link href={'/category/' + link.category}>
@@ -167,7 +167,7 @@ const Navigation = (props) => {
                 : 'loading'}
               <li
                 className={
-                  'font-light h-full text-sm hover:text-glight capitalize flex items-center py-4' +
+                  'font-light h-full text-sm hover:text-glight capitalize' +
                   (router.pathname === '/contact' ? ' active' : ' text-black ')
                 }
               >
