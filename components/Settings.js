@@ -51,10 +51,10 @@ const Settings = (props) => {
           <div className='mb-4 flex flex-col'>
             <label htmlFor='nameofvendor' />
             <input
-              placeholder='Enter your name'
+              placeholder={user.nameofvendor}
               name='nameofvendor'
               onChange={handleChange}
-              value={state.nameofvendor || user.nameofvendor}
+              value={state.nameofvendor}
               type='text'
               className='block w-full md:text-sm text-tiny border border-solid border-black text-inputColor h-7 md:h-11  bg-input focus:outline-none px-2 focus:ring-transparent'
             />

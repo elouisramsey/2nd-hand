@@ -11,7 +11,7 @@ const Featured = () => {
       </h1>
       <div className='border-b-2 border-solid border-bordercr mx-auto w-20' />
       <div className='md:grid-cols-4 grid md:gap-x-6 md:gap-y-8 my-12'>
-        {data ? (
+        {data.length > 4 ? (
           data.slice(4, 8).map((item) => (
             <div
               className='flex flex-col bg-white shadow-lg rounded-lg overflow-hidden mb-6 lg:mb-0'
@@ -49,7 +49,7 @@ const Featured = () => {
             </div>
           ))
         ) : (
-          <p className='text-sm md:text-2xl text-grey md:w-4/5 mb-12 font-light md:leading-7'>
+          <p className='text-sm md:text-2xl text-grey mb-12 font-light md:leading-7 text-center flex flex-center justify-center col-span-4'>
             Loading
           </p>
         )}

@@ -47,21 +47,27 @@ export const loginUser = (userData) => (dispatch) => {
 // update user
 export const updateUser = (userData) => (dispatch) => {
   axios
-    .put(`http://localhost:8000/routes/users/${userData.id}`, userData)
-    .then((res) => {
-      // Save to localStorage
-      // Set token to localStorage
-      const { token } = res.data
-      if (typeof window !== 'undefined') {
-        localStorage.setItem('jwtToken', JSON.stringify(token))
-      }
-      // Set token to Auth header
-      setAuthToken(token)
-      // Decode token to get user data
-      const decoded = jwtDecode(token)
-      // Set current user
-      dispatch(setCurrentUser(decoded))
-    })
+    .post(
+      `http://localhost:8000/routes/users/update/609b9e5138182f6eb856a1e0`,
+      userData
+    )
+    .then(
+      (res) => {
+        // Save to localStorage
+        // Set token to localStorage
+        const { token } = res.data
+        if (typeof window !== 'undefined') {
+          localStorage.getItem(token)
+        }
+        // Set token to Auth header
+        setAuthToken(token)
+        // Decode token to get user data
+        const decoded = jwtDecode(token)
+        // Set current user
+        dispatch(setCurrentUser(decoded))
+      },
+      { withCredentials: true }
+    )
     .catch((err) =>
       dispatch({
         type: GET_ERRORS,
