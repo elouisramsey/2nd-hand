@@ -48,7 +48,7 @@ export const loginUser = (userData) => (dispatch) => {
 export const updateUser = (userData) => (dispatch) => {
   axios
     .post(
-      `http://localhost:8000/routes/users/update/609b9e5138182f6eb856a1e0`,
+      `https://iheejigoro.herokuapp.com/routes/users/update/${userData.id}`,
       userData
     )
     .then(
